@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f2e;
+    --blue: #1a3aff;
+    --cyan: #00d4ff;
+    --gold: #ffd23f;
+    --white: #f5f5f0;
+    --gray: #a8a8b3;
+    --card-bg: #0f1535;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(10,15,46,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(26,58,255,0.25);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    letter-spacing: -0.5px; color: var(--white);
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links button {
+    background: transparent; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--gray); padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s;
+  }
+  .nav-links button:hover, .nav-links button.active {
+    color: var(--white); background: rgba(26,58,255,0.3);
+  }
+  .nav-links button.active { color: var(--cyan); }
+
+  /* ── PAGES ── */
+  .page { display: none; min-height: 100vh; padding-top: 80px; }
+  .page.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ══════════════════════════════
+     PAGE 1 — INTRODUCTION
+  ══════════════════════════════ */
+  #page-intro {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+
+  /* Grid background */
+  #page-intro::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,58,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,58,255,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none;
+  }
+  .orb-1 { width: 600px; height: 600px; background: rgba(26,58,255,0.18); top: -100px; left: -150px; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(0,212,255,0.12); top: 200px; right: -80px; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(255,210,63,0.08); bottom: 100px; left: 200px; }
+
+  .hero {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 48px 60px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,58,255,0.2); border: 1px solid rgba(26,58,255,0.4);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 28px;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; color: var(--cyan); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800; line-height: 1.02;
+    letter-spacing: -2px; margin-bottom: 24px;
+  }
+  .hero h1 .line2 { color: var(--cyan); }
+  .hero h1 .line3 {
+    -webkit-text-stroke: 1.5px var(--blue);
+    color: transparent;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem; color: var(--gray); line-height: 1.7;
+    max-width: 600px; margin-bottom: 44px; font-weight: 300;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: var(--white);
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    font-size: 0.95rem; padding: 14px 32px; border-radius: 8px;
+    transition: all 0.25s; letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: #2a4aff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,255,0.4); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+    font-size: 0.95rem; padding: 14px 32px; border-radius: 8px;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* Stats */
+  .stats-row {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    max-width: 1100px; margin: 0 auto;
+  }
+  .stat-item {
+    padding: 40px 48px;
+    background: rgba(10,15,46,0.6);
+  }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem; font-weight: 800;
+    color: var(--white); letter-spacing: -1px;
+    line-height: 1;
+  }
+  .stat-number span { color: var(--cyan); }
+  .stat-label { color: var(--gray); font-size: 0.85rem; margin-top: 6px; }
+
+  /* About section */
+  .about-section {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  .about-tag {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--cyan); font-weight: 600; margin-bottom: 16px;
+  }
+  .about-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem; font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.5px; margin-bottom: 20px;
+  }
+  .about-section p { color: var(--gray); line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+
+  .pillars {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .pillar {
+    background: var(--card-bg);
+    border: 1px solid rgba(26,58,255,0.2);
+    padding: 24px; border-radius: 12px;
+    transition: border-color 0.25s;
+  }
+  .pillar:hover { border-color: var(--cyan); }
+  .pillar-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .pillar h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.95rem; margin-bottom: 6px;
+  }
+  .pillar p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; margin: 0; }
+
+  /* ══════════════════════════════
+     PAGE 2 — POLICIES
+  ══════════════════════════════ */
+  #page-policies {
+    background: linear-gradient(180deg, var(--navy) 0%, #060b20 100%);
+  }
+
+  .policies-header {
+    max-width: 1100px; margin: 0 auto;
+    padding: 60px 48px 40px;
+  }
+  .policies-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; letter-spacing: -1.5px;
+    margin-bottom: 12px;
+  }
+  .policies-header h1 em { font-style: normal; color: var(--gold); }
+  .policies-header p { color: var(--gray); font-size: 1rem; max-width: 560px; font-weight: 300; }
+
+  .policy-tabs {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px 24px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .policy-tab {
+    background: transparent; border: 1px solid rgba(255,255,255,0.1);
+    color: var(--gray); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    padding: 8px 20px; border-radius: 50px; transition: all 0.2s;
+  }
+  .policy-tab.active, .policy-tab:hover {
+    background: rgba(26,58,255,0.25); border-color: var(--blue);
+    color: var(--white);
+  }
+
+  .policy-grid {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px 80px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .policy-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px; padding: 28px 30px;
+    transition: all 0.25s; cursor: pointer;
+    display: none;
+  }
+  .policy-card.show { display: block; animation: fadeIn 0.3s ease; }
+  .policy-card:hover {
+    border-color: rgba(26,58,255,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .policy-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
+  .policy-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .policy-badge {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 4px 10px; border-radius: 50px; font-weight: 600;
+  }
+  .badge-active { background: rgba(0,212,255,0.15); color: var(--cyan); }
+  .badge-required { background: rgba(255,210,63,0.15); color: var(--gold); }
+  .badge-updated { background: rgba(26,58,255,0.2); color: #7b9fff; }
+
+  .policy-card h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 1.05rem; margin-bottom: 8px;
+  }
+  .policy-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.65; margin-bottom: 16px; }
+  .policy-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .policy-date { font-size: 0.75rem; color: var(--gray); }
+  .policy-link {
+    font-size: 0.8rem; color: var(--cyan); text-decoration: none;
+    display: flex; align-items: center; gap: 4px;
+    transition: gap 0.2s;
+  }
+  .policy-card:hover .policy-link { gap: 8px; }
+
+  /* ══════════════════════════════
+     PAGE 3 — FILE COLLECTION
+  ══════════════════════════════ */
+  #page-files {
+    background: linear-gradient(180deg, var(--navy) 0%, #060b20 100%);
+  }
+
+  .files-header {
+    max-width: 1100px; margin: 0 auto;
+    padding: 60px 48px 40px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 40px;
+  }
+  .files-header-left h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px;
+  }
+  .files-header-left h1 em { font-style: normal; color: var(--gold); }
+  .files-header-left p { color: var(--gray); font-size: 0.95rem; max-width: 480px; font-weight: 300; }
+  .files-header-right {
+    text-align: right; flex-shrink: 0;
+  }
+  .total-counter {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem; font-weight: 800; color: var(--cyan);
+    line-height: 1;
+  }
+  .total-label { font-size: 0.8rem; color: var(--gray); }
+
+  .upload-form-wrap {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px 80px;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: start;
+  }
+
+  /* Left panel */
+  .dept-select-panel {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+    overflow: hidden;
+  }
+  .panel-title {
+    padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+  }
+  .dept-list { padding: 12px; }
+  .dept-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border-radius: 10px; cursor: pointer;
+    transition: background 0.2s; margin-bottom: 2px;
+  }
+  .dept-item:hover { background: rgba(26,58,255,0.15); }
+  .dept-item.selected { background: rgba(26,58,255,0.25); }
+  .dept-dot {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .dept-info { flex: 1; }
+  .dept-name { font-size: 0.88rem; font-weight: 500; }
+  .dept-count { font-size: 0.72rem; color: var(--gray); margin-top: 1px; }
+  .dept-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; flex-shrink: 0; transition: all 0.2s;
+  }
+  .dept-item.selected .dept-check {
+    background: var(--cyan); border-color: var(--cyan); color: var(--navy);
+  }
+
+  /* Right panel */
+  .upload-panel {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+    overflow: hidden;
+  }
+  .upload-top {
+    padding: 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .upload-top .selected-dept-badge {
+    background: rgba(26,58,255,0.25); border: 1px solid rgba(26,58,255,0.4);
+    padding: 4px 14px; border-radius: 50px; font-size: 0.8rem; color: var(--cyan);
+  }
+  .upload-top h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; }
+
+  .upload-body { padding: 28px; }
+
+  .form-row { margin-bottom: 20px; }
+  .form-label {
+    display: block; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--gray); margin-bottom: 8px; font-weight: 500;
+  }
+  .form-input {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+    padding: 11px 14px; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-input:focus { border-color: var(--blue); }
+  .form-input::placeholder { color: rgba(168,168,179,0.5); }
+  select.form-input option { background: var(--navy); }
+
+  /* Drop zone */
+  .drop-zone {
+    border: 2px dashed rgba(26,58,255,0.35);
+    border-radius: 12px; padding: 40px 24px;
+    text-align: center; cursor: pointer; transition: all 0.25s;
+    background: rgba(26,58,255,0.04); margin-bottom: 20px;
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--cyan); background: rgba(0,212,255,0.06);
+  }
+  .drop-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .drop-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .drop-main { font-size: 0.95rem; font-weight: 500; margin-bottom: 6px; }
+  .drop-sub { font-size: 0.8rem; color: var(--gray); }
+  .drop-sub span { color: var(--cyan); }
+
+  /* File list */
+  .file-list { margin-bottom: 20px; }
+  .file-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; background: rgba(255,255,255,0.04);
+    border-radius: 8px; margin-bottom: 6px;
+    animation: slideIn 0.25s ease;
+  }
+  @keyframes slideIn { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:translateX(0); } }
+  .file-type-icon {
+    width: 34px; height: 34px; border-radius: 6px;
+    background: rgba(26,58,255,0.25); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .file-info { flex: 1; min-width: 0; }
+  .file-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-size { font-size: 0.72rem; color: var(--gray); }
+  .file-remove {
+    background: none; border: none; color: var(--gray);
+    cursor: pointer; padding: 4px; font-size: 1rem;
+    transition: color 0.2s; flex-shrink: 0;
+  }
+  .file-remove:hover { color: #ff5c5c; }
+
+  .submit-btn {
+    width: 100%; background: var(--blue); color: var(--white);
+    border: none; cursor: pointer;
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 1rem; padding: 16px; border-radius: 10px;
+    transition: all 0.25s; letter-spacing: 0.02em;
+  }
+  .submit-btn:hover:not(:disabled) { background: #2a4aff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(26,58,255,0.45); }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Success toast */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 999;
+    background: var(--card-bg); border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 12px; padding: 16px 24px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { font-size: 1.4rem; }
+  .toast-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+  .toast-sub { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+
+  /* Submissions table */
+  .submissions-section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+  .submissions-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 1rem; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .submissions-title .count-badge {
+    background: var(--blue); color: var(--white);
+    font-size: 0.72rem; padding: 2px 10px; border-radius: 50px;
+  }
+  .submissions-table { width: 100%; border-collapse: collapse; }
+  .submissions-table th {
+    text-align: left; padding: 10px 16px;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .submissions-table td {
+    padding: 14px 16px; font-size: 0.85rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+  .status-pill {
+    padding: 3px 12px; border-radius: 50px;
+    font-size: 0.72rem; font-weight: 600;
+  }
+  .status-received { background: rgba(0,212,255,0.15); color: var(--cyan); }
+  .no-submissions {
+    text-align: center; padding: 40px;
+    color: var(--gray); font-size: 0.9rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .hero, .about-section, .policies-header, .policy-grid,
+    .files-header, .upload-form-wrap, .submissions-section { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: 2.8rem; letter-spacing: -1px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .about-section { grid-template-columns: 1fr; }
+    .policy-grid { grid-template-columns: 1fr; }
+    .files-header { flex-direction: column; align-items: flex-start; }
+    .upload-form-wrap { grid-template-columns: 1fr; }
+    .policy-tabs { padding-left: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Quality Assurance Section<span> | UTAS-Sur</span></div>
+  <div class="nav-links">
+    <button class="active" onclick="showPage('intro', this)">Introduction</button>
+    <button onclick="showPage('policies', this)">Policies</button>
+    <button onclick="showPage('files', this)">File Collection</button>
+  </div>
+</nav>
+
+<!-- ══ PAGE 1: INTRODUCTION ══ -->
+<div class="page active" id="page-intro">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <section class="hero">
+    <h1>
+      Welcome to<br>
+      <span class="line2">Excellence in</span><br>
+      <span class="line3">Quality</span>
+    </h1>
+    <p class="hero-desc">
+      A unified digital hub connecting students, faculty, and departments across our campus. Explore policies, share documents, and stay informed — all in one place.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="showPage('files', document.querySelectorAll('.nav-links button')[2])">Submit Department Files</button>
+      <button class="btn-outline" onclick="showPage('policies', document.querySelectorAll('.nav-links button')[1])">View Policies</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══ PAGE 2: POLICIES ══ -->
+<div class="page" id="page-policies">
+  <div class="policies-header">
+    <h1>University <em>Policies</em></h1>
+    <p>Official guidelines and regulations governing academic life, conduct, and administration at our institution.</p>
+  </div>
+
+  <div class="policy-tabs">
+    <button class="policy-tab active" onclick="filterPolicies('all', this)">All Policies</button>
+    <button class="policy-tab" onclick="filterPolicies('academic', this)">Academic</button>
+    <button class="policy-tab" onclick="filterPolicies('admin', this)">Administrative</button>
+    <button class="policy-tab" onclick="filterPolicies('it', this)">IT & Data</button>
+  </div>
+
+  <div class="policy-grid">
+
+    <!-- Academic Advising Policy -->
+    <div class="policy-card show" data-cat="academic">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(26,58,255,0.2)">🎓</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Academic Advising Policy</h3>
+      <p>Guidelines for academic advising services, student support pathways, and the responsibilities of advisors and students throughout the academic journey.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQDMzjBW0ogbQJIqGMirW472AZmAZicRdYPXrsC8Iy6qKWY?e=X0aXza" target="_blank" rel="noopener">عربي & English →</a>
+      </div>
+    </div>
+
+    <!-- Academic Regulations -->
+    <div class="policy-card show" data-cat="academic">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(26,58,255,0.2)">📜</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Academic Regulations</h3>
+      <p>Comprehensive regulations governing academic standards, student progression, examinations, and degree requirements across all programs.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQDl00ly80xQQJwInKBtt73zAWRNvDQsd_p0AzZlSuM5img?e=Ywqnwm" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQC4GAWDvxHMQ58BkLcCQuVhAey2ipoZ0tLUg23GEGfb5gI?e=V27Aci" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assets & Infrastructure Management -->
+    <div class="policy-card show" data-cat="admin">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(0,212,255,0.15)">🏛️</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Assets & Infrastructure Management</h3>
+      <p>Policy governing the management, maintenance, and responsible use of university physical assets and infrastructure across all campuses.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQAoTRm7R-1oQ6RkQQzt4_AIAdvzFmTPV7Ir2lA0F-CWuhg?e=hRm32v" target="_blank" rel="noopener">عربي & English →</a>
+      </div>
+    </div>
+
+    <!-- Backup Policy -->
+    <div class="policy-card show" data-cat="it">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(255,210,63,0.15)">💾</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Backup Policy</h3>
+      <p>Standards and procedures for data backup, recovery protocols, and ensuring the continuity and integrity of university digital information systems.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQAATmHhJcNNSbqQjGmvkmhDAY-AoYeNSiRQR3jQP7Tkzg4?e=Ygrew2" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQBlVCBrH99zS5Z6eKKbQ2ZjAUx-wCzuMsjEwuLIBkGWsYM?e=Wa79ee" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documentation Policy -->
+    <div class="policy-card show" data-cat="admin">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(0,212,255,0.15)">🗂️</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Documentation Policy</h3>
+      <p>Standards for creating, managing, storing, and retrieving official university documents and records across all departments.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQD4LkFZWMWQR52MytJNHk89AXPjgQry6Yk2lJX4W8VYgQ8?e=WZO7lf" target="_blank" rel="noopener">عربي & English →</a>
+      </div>
+    </div>
+
+    <!-- Email Security Policy -->
+    <div class="policy-card show" data-cat="it">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(26,58,255,0.2)">📧</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Email Security Policy</h3>
+      <p>Guidelines for the secure use of university email systems, acceptable communication practices, and protection against phishing and misuse.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQBXcVHWG8S2R6jXOpuL5krDAZKm_JdWLD8vijWxHhmUfFQ?e=wZck3A" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQD6VOxP2LEyRIAuTt9OJxFlAQMyXnKgYXKBG2v732Q3GQg?e=TWHPGJ" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Library Policy -->
+    <div class="policy-card show" data-cat="admin">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(0,212,255,0.15)">📚</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Library Policy</h3>
+      <p>Rules and procedures for accessing, borrowing, and using university library resources, facilities, and digital collections.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQA2x1LCHsuITZ47wgH5YVWfAafyEyzkglpScE_41vkVJZ4?e=wQgfZv" target="_blank" rel="noopener">عربي & English →</a>
+      </div>
+    </div>
+
+    <!-- Malware Protection Policy -->
+    <div class="policy-card show" data-cat="it">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(255,100,100,0.15)">🛡️</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Malware Protection Policy</h3>
+      <p>Requirements for protecting university systems from malware, including antivirus standards, software controls, and incident response procedures.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQBDXNO4LrrVQb2MLE8lHOpJAUGH93lkh147oEPKDPVQEUY?e=0hDDk3" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQB6WDU7KQnATqTYGN9W8EmpAQ1S8fZ7YQYtCaZsYOtpGO8?e=RnkLRd" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Security Policy -->
+    <div class="policy-card show" data-cat="it">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(26,58,255,0.2)">🔒</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Network Security Policy</h3>
+      <p>Standards for securing the university network infrastructure, managing access controls, and safeguarding data in transit across all systems.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQBrJOPzKdS0S5kEkLUKIg5-ATQOHa3ztvWelohKshdX_bQ?e=rqzdOh" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQAI0kY32HE4Qog-3joe6XfVAdxNy1xOAaGP7fSO0RRuCyE?e=Ct5JdX" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Policy Management System -->
+    <div class="policy-card show" data-cat="admin">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(255,210,63,0.15)">⚙️</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Policy Management System</h3>
+      <p>Framework for developing, approving, publishing, and reviewing institutional policies to ensure consistency and compliance across the university.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQCUpgB2EFvgT6S6IGDrz6NlAR7d3vPqhNwWJiyInuR2cD4?e=yaSos2" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQCjoEsXJybyQ78SlQndhwXfAXGHM-aPbmsN63H75K7tLxU?e=ZmEMvI" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remote Access Policy -->
+    <div class="policy-card show" data-cat="it">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(0,212,255,0.15)">🌐</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Remote Access Policy for IT Resources</h3>
+      <p>Rules governing secure remote access to university IT systems, VPN usage, and responsibilities of staff and students working off-campus.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQBWTAjZz7a3TJBvSOoSNcKJAWP0yO6UnJg_555Nf3dbrig?e=LeJTx9" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQCyWaLx7MJNR6CG1gsrhTqBAQ-193339VRzTIf6x2t7zAc?e=BNmkf6" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risk Management Policy -->
+    <div class="policy-card show" data-cat="admin">
+      <div class="policy-card-top">
+        <div class="policy-icon" style="background:rgba(255,100,100,0.15)">📊</div>
+        <span class="policy-badge badge-active">Active</span>
+      </div>
+      <h3>Risk Management Policy</h3>
+      <p>Institutional approach to identifying, assessing, and mitigating risks that may affect the university's operations, reputation, and strategic objectives.</p>
+      <div class="policy-card-footer">
+        <span class="policy-date">January 2026</span>
+        <div style="display:flex;gap:12px;">
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQDWYib0uWEAR7Hj6cZAixJsAQyQkQAut1dR_VN7RzwUp98?e=8FooPK" target="_blank" rel="noopener">عربي →</a>
+          <a class="policy-link" href="https://utasoman-my.sharepoint.com/:b:/g/personal/qa_sur_utas_edu_om/IQAlRwieJn2XSpk5HjLm6DNvAXDfxjHox6TwGznhoe9Z-qU?e=I9DbGq" target="_blank" rel="noopener">English →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PAGE 3: FILE COLLECTION ══ -->
+<div class="page" id="page-files">
+  <!--
+  <div class="files-header">
+    <div class="files-header-left">
+      <h1>Department <em>File</em> Submission</h1>
+      <p>Submit documents, reports, and records on behalf of your department. All file types are accepted.</p>
+    </div>
+    <div class="files-header-right">
+      <div class="total-counter" id="totalCounter">0</div>
+      <div class="total-label">Files submitted this session</div>
+    </div>
+  </div>
+
+  <div class="upload-form-wrap">
+    LEFT: Dept Selector
+    <div class="dept-select-panel">
+      <div class="panel-title">Select Department</div>
+      <div class="dept-list" id="deptList">
+        <div class="dept-item selected" onclick="selectDept(this, 'Computer Science')" data-dept="Computer Science">
+          <div class="dept-dot" style="background:rgba(26,58,255,0.25)">💻</div>
+          <div class="dept-info">
+            <div class="dept-name">Computer Science</div>
+            <div class="dept-count" id="count-Computer Science">0 files submitted</div>
+          </div>
+          <div class="dept-check">✓</div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Engineering')" data-dept="Engineering">
+          <div class="dept-dot" style="background:rgba(255,210,63,0.15)">⚙️</div>
+          <div class="dept-info">
+            <div class="dept-name">Engineering</div>
+            <div class="dept-count" id="count-Engineering">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Business & Finance')" data-dept="Business & Finance">
+          <div class="dept-dot" style="background:rgba(0,212,255,0.15)">📊</div>
+          <div class="dept-info">
+            <div class="dept-name">Business & Finance</div>
+            <div class="dept-count" id="count-Business & Finance">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Medical & Health Sciences')" data-dept="Medical & Health Sciences">
+          <div class="dept-dot" style="background:rgba(255,100,100,0.15)">🏥</div>
+          <div class="dept-info">
+            <div class="dept-name">Medical & Health Sciences</div>
+            <div class="dept-count" id="count-Medical & Health Sciences">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Arts & Humanities')" data-dept="Arts & Humanities">
+          <div class="dept-dot" style="background:rgba(180,100,255,0.2)">🎨</div>
+          <div class="dept-info">
+            <div class="dept-name">Arts & Humanities</div>
+            <div class="dept-count" id="count-Arts & Humanities">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Law')" data-dept="Law">
+          <div class="dept-dot" style="background:rgba(255,210,63,0.2)">⚖️</div>
+          <div class="dept-info">
+            <div class="dept-name">Law</div>
+            <div class="dept-count" id="count-Law">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Natural Sciences')" data-dept="Natural Sciences">
+          <div class="dept-dot" style="background:rgba(0,255,150,0.15)">🔬</div>
+          <div class="dept-info">
+            <div class="dept-name">Natural Sciences</div>
+            <div class="dept-count" id="count-Natural Sciences">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+        <div class="dept-item" onclick="selectDept(this, 'Administration')" data-dept="Administration">
+          <div class="dept-dot" style="background:rgba(26,58,255,0.2)">🏛️</div>
+          <div class="dept-info">
+            <div class="dept-name">Administration</div>
+            <div class="dept-count" id="count-Administration">0 files submitted</div>
+          </div>
+          <div class="dept-check"></div>
+        </div>
+      </div>
+    </div>
+
+    RIGHT: Upload Form
+    <div class="upload-panel">
+      <div class="upload-top">
+        <div>
+          <h2>Upload Files</h2>
+        </div>
+        <span class="selected-dept-badge" id="selectedDeptBadge">Computer Science</span>
+      </div>
+      <div class="upload-body">
+        <div class="form-row">
+          <label class="form-label">Submitter Name</label>
+          <input type="text" class="form-input" id="submitterName" placeholder="e.g. Dr. Sarah Al-Amri">
+        </div>
+        <div class="form-row">
+          <label class="form-label">Document Type</label>
+          <select class="form-input" id="docType">
+            <option value="">Select document type...</option>
+            <option>Annual Report</option>
+            <option>Budget Proposal</option>
+            <option>Research Paper</option>
+            <option>Meeting Minutes</option>
+            <option>Policy Document</option>
+            <option>Student Records</option>
+            <option>Curriculum Plan</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Description</label>
+          <input type="text" class="form-input" id="docDescription" placeholder="Brief description of the files...">
+        </div>
+
+        <div class="drop-zone" id="dropZone">
+          <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
+          <div class="drop-icon">📂</div>
+          <div class="drop-main">Drop files here or <span style="color:var(--cyan)">browse</span></div>
+          <div class="drop-sub">Any file type accepted · Max 50MB per file</div>
+        </div>
+
+        <div class="file-list" id="fileList"></div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitFiles()" disabled>
+          Submit to Department
+        </button>
+      </div>
+    </div>
+  </div>
+
+  Submissions Table
+  <div class="submissions-section">
+    <div class="submissions-title">
+      Recent Submissions
+      <span class="count-badge" id="submissionCount">0</span>
+    </div>
+    <div id="submissionsContainer">
+      <div class="no-submissions">No submissions yet. Upload files above to get started.</div>
+    </div>
+  </div>
+  -->
+
+  <!-- Under Construction -->
+  <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; text-align:center; padding: 40px;">
+    <div style="font-size:4rem; margin-bottom:24px;">🚧</div>
+    <h2 style="font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; letter-spacing:-1px; margin-bottom:14px;">Under Construction</h2>
+    <p style="color:var(--gray); font-size:1rem; max-width:420px; line-height:1.7; font-weight:300;">This section is currently being built. Please check back soon — file collection for departments will be available shortly.</p>
+    <div style="margin-top:32px; padding: 12px 28px; border:1px solid rgba(255,210,63,0.3); border-radius:50px; background:rgba(255,210,63,0.08); color:var(--gold); font-size:0.85rem; font-weight:500; letter-spacing:0.05em;">Coming Soon</div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-icon">✅</div>
+  <div>
+    <div class="toast-title">Files Submitted Successfully</div>
+    <div class="toast-sub" id="toastSub">3 files received by Computer Science</div>
+  </div>
+</div>
+
+<script>
+  // ─── Navigation ───
+  function showPage(name, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ─── Policy Filter ───
+  function filterPolicies(cat, btn) {
+    document.querySelectorAll('.policy-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.policy-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.add('show');
+      } else {
+        card.classList.remove('show');
+      }
+    });
+  }
+
+  // ─── File Upload Logic ───
+  let selectedFiles = [];
+  let selectedDept = 'Computer Science';
+  let submissions = [];
+  let deptCounts = {};
+
+  function selectDept(el, dept) {
+    document.querySelectorAll('.dept-item').forEach(d => {
+      d.classList.remove('selected');
+      d.querySelector('.dept-check').textContent = '';
+    });
+    el.classList.add('selected');
+    el.querySelector('.dept-check').textContent = '✓';
+    selectedDept = dept;
+    document.getElementById('selectedDeptBadge').textContent = dept;
+  }
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  function handleFiles(files) {
+    Array.from(files).forEach(f => {
+      if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) {
+        selectedFiles.push(f);
+      }
+    });
+    renderFileList();
+    document.getElementById('submitBtn').disabled = selectedFiles.length === 0;
+  }
+
+  function getFileIcon(name) {
+    const ext = name.split('.').pop().toLowerCase();
+    if (['pdf'].includes(ext)) return '📄';
+    if (['doc','docx'].includes(ext)) return '📝';
+    if (['xls','xlsx','csv'].includes(ext)) return '📊';
+    if (['ppt','pptx'].includes(ext)) return '📋';
+    if (['jpg','jpeg','png','gif','webp'].includes(ext)) return '🖼️';
+    if (['zip','rar','7z'].includes(ext)) return '📦';
+    if (['mp4','mov','avi'].includes(ext)) return '🎬';
+    return '📎';
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
+  }
+
+  function renderFileList() {
+    const list = document.getElementById('fileList');
+    list.innerHTML = selectedFiles.map((f, i) => `
+      <div class="file-item">
+        <div class="file-type-icon">${getFileIcon(f.name)}</div>
+        <div class="file-info">
+          <div class="file-name">${f.name}</div>
+          <div class="file-size">${formatBytes(f.size)}</div>
+        </div>
+        <button class="file-remove" onclick="removeFile(${i})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function removeFile(i) {
+    selectedFiles.splice(i, 1);
+    renderFileList();
+    document.getElementById('submitBtn').disabled = selectedFiles.length === 0;
+  }
+
+  function submitFiles() {
+    const name = document.getElementById('submitterName').value || 'Anonymous';
+    const type = document.getElementById('docType').value || 'Unspecified';
+    const desc = document.getElementById('docDescription').value || '—';
+    const count = selectedFiles.length;
+    const dept = selectedDept;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const dateStr = now.toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'});
+
+    submissions.unshift({ dept, name, type, desc, count, dateStr, timeStr });
+
+    deptCounts[dept] = (deptCounts[dept] || 0) + count;
+    const countEl = document.getElementById('count-' + dept);
+    if (countEl) {
+      const total = deptCounts[dept];
+      countEl.textContent = total + ' file' + (total !== 1 ? 's' : '') + ' submitted';
+    }
+
+    const totalCount = Object.values(deptCounts).reduce((a, b) => a + b, 0);
+    document.getElementById('totalCounter').textContent = totalCount;
+
+    selectedFiles = [];
+    renderFileList();
+    document.getElementById('submitterName').value = '';
+    document.getElementById('docType').value = '';
+    document.getElementById('docDescription').value = '';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('submitBtn').disabled = true;
+
+    renderSubmissions();
+    showToast(`${count} file${count !== 1 ? 's' : ''} received by ${dept}`);
+  }
+
+  function renderSubmissions() {
+    const container = document.getElementById('submissionsContainer');
+    document.getElementById('submissionCount').textContent = submissions.length;
+    if (submissions.length === 0) {
+      container.innerHTML = '<div class="no-submissions">No submissions yet. Upload files above to get started.</div>';
+      return;
+    }
+    container.innerHTML = `
+      <table class="submissions-table">
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>Submitted By</th>
+            <th>Type</th>
+            <th>Files</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${submissions.map(s => `
+            <tr>
+              <td><strong>${s.dept}</strong></td>
+              <td>${s.name}</td>
+              <td>${s.type}</td>
+              <td>${s.count} file${s.count !== 1 ? 's' : ''}</td>
+              <td style="color:var(--gray)">${s.dateStr} · ${s.timeStr}</td>
+              <td><span class="status-pill status-received">Received</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastSub').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
