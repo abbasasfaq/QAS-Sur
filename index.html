@@ -506,7 +506,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Quality Assurance Section<span> | UTAS-Sur</span></div>
+  <div class="nav-logo">Quality Assurance Section</div>
   <div class="nav-links">
     <button class="active" onclick="showPage('intro', this)">Introduction</button>
     <button onclick="showPage('policies', this)">Policies</button>
@@ -520,19 +520,122 @@
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 
-  <section class="hero">
-    <h1>
-      Welcome to<br>
-      <span class="line2">Excellence in</span><br>
-      <span class="line3">Quality</span>
-    </h1>
-    <p class="hero-desc">
-      A unified digital hub connecting students, faculty, and departments across our campus. Explore policies, share documents, and stay informed — all in one place.
-    </p>
-    <div class="hero-ctas">
-      <button class="btn-primary" onclick="showPage('files', document.querySelectorAll('.nav-links button')[2])">Submit Department Files</button>
-      <button class="btn-outline" onclick="showPage('policies', document.querySelectorAll('.nav-links button')[1])">View Policies</button>
+  <!-- Mission, Vision, Values, Graduate Attributes -->
+  <section style="max-width:1100px; margin:0 auto; padding:48px 48px 80px;">
+
+    <!-- Hero row: heading+CTAs left, logo right -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:36px; gap:24px;">
+
+      <!-- Left: heading + description -->
+      <div style="flex:1;">
+        <h1 style="font-family:'Syne',sans-serif; font-size:1.55rem; font-weight:800; line-height:1.3; margin-bottom:10px; color:var(--white);">
+          Welcome to <span style="background:linear-gradient(90deg,#1a3aff,#00d4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Excellence in Quality</span>
+        </h1>
+        <p style="color:var(--gray); font-size:0.82rem; line-height:1.7; max-width:440px; margin:0;">A unified digital hub connecting students, faculty, and departments across our campus. Explore policies, share documents, and stay informed — all in one place.</p>
+      </div>
+
+      <!-- Right: logo card -->
+      <div style="flex-shrink:0; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:20px 28px; display:flex; flex-direction:column; align-items:center; gap:10px; box-shadow:0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08); backdrop-filter:blur(12px);">
+        <img src="data:image/png;base64,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" alt="UTAS-Sur Logo" style="max-height:80px; max-width:220px; object-fit:contain; filter:drop-shadow(0 2px 8px rgba(0,212,255,0.18));">
+      </div>
+
     </div>
+
+    <!-- Mission & Vision -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+      <div style="background:var(--card-bg); border:1px solid rgba(26,58,255,0.2); border-radius:14px; padding:28px 30px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(26,58,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🎯</div>
+          <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--cyan);">Mission</h3>
+        </div>
+        <p style="color:var(--gray); font-size:0.88rem; line-height:1.75; font-weight:300;">To prepare future-ready and competitive capabilities through a stimulating learning environment, inclusive education, impactful research, and transformative partnerships that support creativity and innovation.</p>
+      </div>
+
+      <div style="background:var(--card-bg); border:1px solid rgba(0,212,255,0.2); border-radius:14px; padding:28px 30px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🔭</div>
+          <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--cyan);">Vision</h3>
+        </div>
+        <p style="color:var(--gray); font-size:0.88rem; line-height:1.75; font-weight:300;">To be a globally recognized university in technology and applied sciences education, fostering innovation and shaping a sustainable, knowledge-based future.</p>
+      </div>
+    </div>
+
+    <!-- Values -->
+    <div style="background:var(--card-bg); border:1px solid rgba(255,210,63,0.15); border-radius:14px; padding:28px 30px; margin-bottom:20px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,210,63,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⭐</div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--gold);">Our Values</h3>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">⚖️ Integrity</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We believe in ethical principles, transparency, fairness, and accountability.</div>
+        </div>
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">🏆 Excellence</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We are committed to the highest standards of quality and professionalism in our conduct and practices.</div>
+        </div>
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">🤝 Partnerships</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We seek opportunities for sustainable collaboration with the community and various stakeholders.</div>
+        </div>
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">🏡 Belonging & National Identity</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We demonstrate respect for Omani culture and a sense of belonging to our country, community, and university.</div>
+        </div>
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">🌍 Diversity</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We foster an inclusive environment that values diverse perspectives, backgrounds, and abilities.</div>
+        </div>
+        <div style="padding:16px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.85rem; margin-bottom:6px; color:var(--white);">🔄 Adaptability</div>
+          <div style="font-size:0.78rem; color:var(--gray); line-height:1.6;">We embrace change, respond proactively to emerging challenges, and remain flexible in how we lead, teach, and serve our communities.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Attributes -->
+    <div style="background:var(--card-bg); border:1px solid rgba(180,100,255,0.2); border-radius:14px; padding:28px 30px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(180,100,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🎓</div>
+        <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#c084fc;">Graduate Attributes</h3>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Communication Skills</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Teamwork and Leadership</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Discipline Knowledge and Skills</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Creativity and Innovation</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Entrepreneurial Skills</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Lifelong Learning</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Technical and Digital Competency</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:14px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <span style="color:#c084fc; font-size:1rem; flex-shrink:0;">✦</span>
+          <div style="font-size:0.82rem; font-weight:500;">Critical Thinking, Analysis, and Problem Solving</div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
 </div>
