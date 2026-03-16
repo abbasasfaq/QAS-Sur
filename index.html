@@ -4,7 +4,7 @@
 <meta name="cf-email-obfuscation" content="off">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>University Portal</title>
+<title>QAS UTAS-Sur</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -536,7 +536,7 @@
     <span style="font-size:1.3rem; font-weight:800; color:var(--cyan); font-family:'Syne',sans-serif; direction:rtl; display:block;">قسم ضمان الجودة</span>
   </div>
   <div class="nav-links">
-    <button class="active" onclick="showPage('intro', this)">Introduction<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">مقدمة</span></button>
+    <button class="active" onclick="showPage('intro', this)">Home<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">الرئيسية</span></button>
     <button onclick="showPage('policies', this)">Policies<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">السياسات</span></button>
     <button onclick="showPage('files', this)">File Upload<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">رفع الملفات</span></button>
     <button onclick="showPage('downloads', this)">File Download<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">تنزيل الملفات</span></button>
@@ -1011,8 +1011,8 @@
             <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">Academic Year / السنة</label>
             <select id="acadYear" onchange="onDocChange()" style="width:100%; background:#0f1535; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none;">
               <option value="">— Select year —</option>
-              <option value="2026-2027">2026-2027</option>              
-			  <option value="2025-2026">2025-2026</option>              
+              <option value="2025-2026">2025-2026</option>
+              <option value="2024-2025">2024-2025</option>
             </select>
           </div>
           <div>
@@ -1172,7 +1172,7 @@
   // DEPARTMENT DOCUMENT LISTS
   // ═══════════════════════════════════════════════════════════════════
   var DEPT_DOCS = {
-    "AVC Office": ["Branch Council Meeting Minutes","Terms of Reference for Committees","Administrative Decisions (HO)","Branch Council Review Report","Annual Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "AVC Office": ["Branch Council Meeting Minutes","Terms of Reference for Committees","Administrative Decisions (HO)","Branch Council Review Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
     "DAVC \u2013 Academic Affairs (DAVC-AA)": ["Meeting Minutes of Heads of Academic Departments","Program/Curriculum Review Reports","Staff Induction Documents","Staff Induction Review Report","Student Orientation Documents","Student Orientation Review Report","Physical Resources Need from Academic Departments","Academic Support Services Documents","Staff Training Needs Approval Document","Benchmarking Approval Document","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Midterm Minutes of Meeting","Final Examination Minutes of Meeting","Midterm Examination Survey Report","Final Examination Survey Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
     "DAVC \u2013 Postgraduate, Research & Innovation (DAVC-PSSRI)": ["Meeting Minutes with Heads of Departments","Internal Research Grant Approval Document","Entrepreneurship and Innovation Approval Documents","Research Infrastructure Approval Documents","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
     "DAVC \u2013 Electronic Systems & Student Services (DAVC-ESSS)": ["Meetings of Meeting with Units","Student Activity Approval Document","Digital Infrastructure Approval Documents","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
@@ -1216,11 +1216,10 @@
   // ═══════════════════════════════════════════════════════════════
   var DOC_LINKS = {
     // AVC Office
-    "AVC Office||Branch Council Meeting Minutes": "https://utasoman-my.sharepoint.com/:f:/g/personal/qa_sur_utas_edu_om/IgDMuwM2LKlvTriLwEZDbDfMAQdaZfCJBoqe9nqQWp678VA?e=hDfo2D",
+    "AVC Office||Branch Council Meeting Minutes": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Terms of Reference for Committees": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Administrative Decisions (HO)": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Branch Council Review Report": "YOUR_ONEDRIVE_LINK_HERE",
-	"AVC Office||Annual Report": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
     "AVC Office||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
