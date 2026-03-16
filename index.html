@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="cf-email-obfuscation" content="off">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>University Portal</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -38,14 +40,15 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800; font-size: 1.3rem;
     letter-spacing: -0.5px; color: var(--white);
+    line-height: 1.3;
   }
   .nav-logo span { color: var(--cyan); }
   .nav-links { display: flex; gap: 6px; }
   .nav-links button {
     background: transparent; border: none; cursor: pointer;
     font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-    color: var(--gray); padding: 8px 18px; border-radius: 50px;
-    transition: all 0.25s;
+    color: var(--gray); padding: 6px 18px; border-radius: 50px;
+    transition: all 0.25s; line-height: 1.3; text-align: center;
   }
   .nav-links button:hover, .nav-links button.active {
     color: var(--white); background: rgba(26,58,255,0.3);
@@ -521,18 +524,23 @@
       }
     });
   }
+
 </script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Quality Assurance Section</div>
+  <div class="nav-logo">
+    Quality Assurance Section<br>
+    <span style="font-size:1.3rem; font-weight:800; color:var(--cyan); font-family:'Syne',sans-serif; direction:rtl; display:block;">قسم ضمان الجودة</span>
+  </div>
   <div class="nav-links">
-    <button class="active" onclick="showPage('intro', this)">Introduction</button>
-    <button onclick="showPage('policies', this)">Policies</button>
-    <button onclick="showPage('files', this)">File Collection</button>
-    <button onclick="showPage('contact', this)">Contact Us</button>
+    <button class="active" onclick="showPage('intro', this)">Introduction<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">مقدمة</span></button>
+    <button onclick="showPage('policies', this)">Policies<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">السياسات</span></button>
+    <button onclick="showPage('files', this)">File Upload<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">رفع الملفات</span></button>
+    <button onclick="showPage('downloads', this)">File Download<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">تنزيل الملفات</span></button>
+    <button onclick="showPage('contact', this)">Contact Us<br><span style="font-size:0.7rem; font-weight:400; color:var(--cyan); direction:rtl; display:block;">اتصل بنا</span></button>
   </div>
 </nav>
 
@@ -884,157 +892,205 @@
 
 <!-- ══ PAGE 3: FILE COLLECTION ══ -->
 <div class="page" id="page-files">
-  <!--
-  <div class="files-header">
-    <div class="files-header-left">
-      <h1>Department <em>File</em> Submission</h1>
-      <p>Submit documents, reports, and records on behalf of your department. All file types are accepted.</p>
-    </div>
-    <div class="files-header-right">
-      <div class="total-counter" id="totalCounter">0</div>
-      <div class="total-label">Files submitted this session</div>
-    </div>
-  </div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <section style="max-width:1100px; margin:0 auto; padding:48px 48px 80px;">
 
-  <div class="upload-form-wrap">
-    LEFT: Dept Selector
-    <div class="dept-select-panel">
-      <div class="panel-title">Select Department</div>
-      <div class="dept-list" id="deptList">
-        <div class="dept-item selected" onclick="selectDept(this, 'Computer Science')" data-dept="Computer Science">
-          <div class="dept-dot" style="background:rgba(26,58,255,0.25)">💻</div>
-          <div class="dept-info">
-            <div class="dept-name">Computer Science</div>
-            <div class="dept-count" id="count-Computer Science">0 files submitted</div>
-          </div>
-          <div class="dept-check">✓</div>
+    <!-- Header -->
+    <div style="margin-bottom:36px;">
+      <h2 style="font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:4px;">File Upload</h2>
+      <p style="font-size:0.82rem; color:var(--cyan); margin-bottom:8px; direction:rtl; text-align:right;">رفع الملفات</p>
+      <p style="color:var(--gray); font-size:0.88rem; line-height:1.7;">Verify your email, select your department and required document, then upload to the correct OneDrive folder.</p>
+    </div>
+
+    <!-- 2x2 GRID -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:20px;">
+
+      <!-- CELL 1 (top-left): Email Verification -->
+      <div id="step1Box" style="background:var(--card-bg); border:1px solid rgba(26,58,255,0.25); border-radius:16px; padding:28px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <span style="background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; font-size:0.72rem; font-weight:700; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</span>
+          <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--cyan); margin:0;">Verify Your Email</h3>
         </div>
-        <div class="dept-item" onclick="selectDept(this, 'Engineering')" data-dept="Engineering">
-          <div class="dept-dot" style="background:rgba(255,210,63,0.15)">⚙️</div>
-          <div class="dept-info">
-            <div class="dept-name">Engineering</div>
-            <div class="dept-count" id="count-Engineering">0 files submitted</div>
-          </div>
-          <div class="dept-check"></div>
+        <p style="color:var(--gray); font-size:0.75rem; margin-bottom:4px; margin-left:34px;">الرجاء التحقق من بريدك الجامعي</p>
+        <p style="color:var(--gray); font-size:0.75rem; margin-bottom:18px; margin-left:34px;">Contact: <strong style="color:var(--cyan);">qa.sur&#64;utas.edu.om</strong></p>
+
+        <!-- Verified badge -->
+        <div id="verifiedBadge" style="display:none; align-items:center; gap:8px; background:rgba(0,212,100,0.08); border:1px solid rgba(0,212,100,0.25); border-radius:8px; padding:8px 14px; margin-bottom:14px;">
+          <span>✅</span>
+          <div style="flex:1; font-size:0.78rem; font-weight:600; color:#00d464;" id="verifiedEmailBadge"></div>
+          <button onclick="resetAll()" style="background:transparent; border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:var(--gray); font-size:0.7rem; padding:3px 8px; cursor:pointer; font-family:'DM Sans',sans-serif;">Change</button>
         </div>
-        <div class="dept-item" onclick="selectDept(this, 'Business & Finance')" data-dept="Business & Finance">
-          <div class="dept-dot" style="background:rgba(0,212,255,0.15)">📊</div>
-          <div class="dept-info">
-            <div class="dept-name">Business & Finance</div>
-            <div class="dept-count" id="count-Business & Finance">0 files submitted</div>
+
+        <!-- Email input -->
+        <div id="emailInputArea">
+          <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">University Email / البريد الجامعي</label>
+          <div style="display:flex; gap:8px; margin-bottom:10px;">
+            <input id="verifyEmailInput" type="email" placeholder="name@utas.edu.om"
+              style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:9px 12px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none; min-width:0;"
+              onkeydown="if(event.key==='Enter') verifyEmail()">
+            <button onclick="verifyEmail()" id="verifyBtn"
+              style="background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; border:none; border-radius:8px; padding:9px 16px; font-size:0.82rem; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; white-space:nowrap; flex-shrink:0;">
+              Verify →
+            </button>
           </div>
-          <div class="dept-check"></div>
-        </div>
-        <div class="dept-item" onclick="selectDept(this, 'Medical & Health Sciences')" data-dept="Medical & Health Sciences">
-          <div class="dept-dot" style="background:rgba(255,100,100,0.15)">🏥</div>
-          <div class="dept-info">
-            <div class="dept-name">Medical & Health Sciences</div>
-            <div class="dept-count" id="count-Medical & Health Sciences">0 files submitted</div>
+          <div id="verifyChecking" style="display:none; color:var(--cyan); font-size:0.78rem;">🔄 Checking...</div>
+          <div id="verifyUnauthorized" style="display:none; background:rgba(255,60,60,0.08); border:1px solid rgba(255,60,60,0.3); border-radius:8px; padding:10px 14px;">
+            <div style="font-size:0.82rem; font-weight:700; color:#ff6b6b; margin-bottom:3px;">🚫 Unauthorized User</div>
+            <div style="font-size:0.75rem; color:var(--gray); margin-bottom:2px;">Email <strong id="rejectedEmail" style="color:#ff6b6b;"></strong> is not authorized.</div>
+            <div style="font-size:0.75rem; color:var(--gray);">Contact: <strong style="color:var(--cyan);">qa.sur&#64;utas.edu.om</strong></div>
           </div>
-          <div class="dept-check"></div>
-        </div>
-        <div class="dept-item" onclick="selectDept(this, 'Arts & Humanities')" data-dept="Arts & Humanities">
-          <div class="dept-dot" style="background:rgba(180,100,255,0.2)">🎨</div>
-          <div class="dept-info">
-            <div class="dept-name">Arts & Humanities</div>
-            <div class="dept-count" id="count-Arts & Humanities">0 files submitted</div>
-          </div>
-          <div class="dept-check"></div>
-        </div>
-        <div class="dept-item" onclick="selectDept(this, 'Law')" data-dept="Law">
-          <div class="dept-dot" style="background:rgba(255,210,63,0.2)">⚖️</div>
-          <div class="dept-info">
-            <div class="dept-name">Law</div>
-            <div class="dept-count" id="count-Law">0 files submitted</div>
-          </div>
-          <div class="dept-check"></div>
-        </div>
-        <div class="dept-item" onclick="selectDept(this, 'Natural Sciences')" data-dept="Natural Sciences">
-          <div class="dept-dot" style="background:rgba(0,255,150,0.15)">🔬</div>
-          <div class="dept-info">
-            <div class="dept-name">Natural Sciences</div>
-            <div class="dept-count" id="count-Natural Sciences">0 files submitted</div>
-          </div>
-          <div class="dept-check"></div>
-        </div>
-        <div class="dept-item" onclick="selectDept(this, 'Administration')" data-dept="Administration">
-          <div class="dept-dot" style="background:rgba(26,58,255,0.2)">🏛️</div>
-          <div class="dept-info">
-            <div class="dept-name">Administration</div>
-            <div class="dept-count" id="count-Administration">0 files submitted</div>
-          </div>
-          <div class="dept-check"></div>
+          <div id="verifyError" style="display:none; color:#ffd23f; font-size:0.75rem; margin-top:6px;"></div>
         </div>
       </div>
-    </div>
 
-    RIGHT: Upload Form
-    <div class="upload-panel">
-      <div class="upload-top">
-        <div>
-          <h2>Upload Files</h2>
+      <!-- CELL 2 (top-right): Department -->
+      <div id="step2Box" style="display:none; background:var(--card-bg); border:1px solid rgba(26,58,255,0.25); border-radius:16px; padding:28px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <span style="background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; font-size:0.72rem; font-weight:700; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</span>
+          <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--cyan); margin:0;">Select Department / اختر قسمك</h3>
         </div>
-        <span class="selected-dept-badge" id="selectedDeptBadge">Computer Science</span>
+        <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">Department / القسم</label>
+        <select id="deptSelector" onchange="onDeptChange()" style="width:100%; background:#0f1535; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none;">
+          <option value="">— Select your department —</option>
+          <optgroup label="AVC &amp; DAVC Offices">
+            <option value="AVC Office">AVC Office</option>
+            <option value="DAVC – Academic Affairs (DAVC-AA)">DAVC – Academic Affairs (DAVC-AA)</option>
+            <option value="DAVC – Postgraduate, Research &amp; Innovation (DAVC-PSSRI)">DAVC – Postgraduate, Research &amp; Innovation (DAVC-PSSRI)</option>
+            <option value="DAVC – Electronic Systems &amp; Student Services (DAVC-ESSS)">DAVC – Electronic Systems &amp; Student Services (DAVC-ESSS)</option>
+            <option value="DAVC – Administrative &amp; Financial Affairs (DAFA)">DAVC – Administrative &amp; Financial Affairs (DAFA)</option>
+          </optgroup>
+          <optgroup label="Administrative Units">
+            <option value="Human Resource Section (HRS)">Human Resource Section (HRS)</option>
+            <option value="Financial Affairs Section (FAS)">Financial Affairs Section (FAS)</option>
+            <option value="Administrative Affairs Section (AAS)">Administrative Affairs Section (AAS)</option>
+            <option value="Training and Career Guidance Centre (TCGC)">Training and Career Guidance Centre (TCGC)</option>
+            <option value="Student Affairs Centre (SAC)">Student Affairs Centre (SAC)</option>
+            <option value="Admission and Registration Centre (ARC)">Admission and Registration Centre (ARC)</option>
+            <option value="Information Systems and Educational Technologies Centre (ISETC)">Information Systems and Educational Technologies Centre (ISETC)</option>
+            <option value="Research and Consultation Department (RCD)">Research and Consultation Department (RCD)</option>
+            <option value="Innovation and Technology Transfer">Innovation and Technology Transfer</option>
+            <option value="Quality Assurance Section (QAS)">Quality Assurance Section (QAS)</option>
+          </optgroup>
+          <optgroup label="Academic Departments">
+            <option value="Computing and Information Sciences Department">Computing and Information Sciences Department</option>
+            <option value="Biotechnology Department">Biotechnology Department</option>
+            <option value="Mass Communication Department">Mass Communication Department</option>
+            <option value="Preparatory Studies Centre">Preparatory Studies Centre</option>
+          </optgroup>
+          <optgroup label="Committees">
+            <option value="Quality Assurance Committee">Quality Assurance Committee</option>
+            <option value="Academic Advising Committee">Academic Advising Committee</option>
+            <option value="Activities and Field Trips Committee">Activities and Field Trips Committee</option>
+            <option value="Professional Development Committee">Professional Development Committee</option>
+            <option value="Documentation Committee">Documentation Committee</option>
+            <option value="Examination and Assessment Committee">Examination and Assessment Committee</option>
+            <option value="Health and Safety Committee">Health and Safety Committee</option>
+            <option value="Risk Management Committee">Risk Management Committee</option>
+            <option value="E-learning Committee (PSC)">E-learning Committee (PSC)</option>
+            <option value="Students Learning Support Committee (PSC)">Students Learning Support Committee (PSC)</option>
+            <option value="Student Activities Committee (PSC)">Student Activities Committee (PSC)</option>
+          </optgroup>
+        </select>
       </div>
-      <div class="upload-body">
-        <div class="form-row">
-          <label class="form-label">Submitter Name</label>
-          <input type="text" class="form-input" id="submitterName" placeholder="e.g. Dr. Sarah Al-Amri">
-        </div>
-        <div class="form-row">
-          <label class="form-label">Document Type</label>
-          <select class="form-input" id="docType">
-            <option value="">Select document type...</option>
-            <option>Annual Report</option>
-            <option>Budget Proposal</option>
-            <option>Research Paper</option>
-            <option>Meeting Minutes</option>
-            <option>Policy Document</option>
-            <option>Student Records</option>
-            <option>Curriculum Plan</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label class="form-label">Description</label>
-          <input type="text" class="form-input" id="docDescription" placeholder="Brief description of the files...">
+
+      <!-- CELL 3 (bottom-left): Document + Year + Semester -->
+      <div id="step3Box" style="display:none; background:var(--card-bg); border:1px solid rgba(26,58,255,0.25); border-radius:16px; padding:28px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <span style="background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; font-size:0.72rem; font-weight:700; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</span>
+          <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--cyan); margin:0;">Document, Year &amp; Semester</h3>
         </div>
 
-        <div class="drop-zone" id="dropZone">
-          <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
-          <div class="drop-icon">📂</div>
-          <div class="drop-main">Drop files here or <span style="color:var(--cyan)">browse</span></div>
-          <div class="drop-sub">Any file type accepted · Max 50MB per file</div>
+        <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">Required Document / المستند المطلوب</label>
+        <select id="docSelector" onchange="onDocChange()" style="width:100%; background:#0f1535; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none; margin-bottom:14px;">
+          <option value="">— Select required document —</option>
+        </select>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div>
+            <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">Academic Year / السنة</label>
+            <select id="acadYear" onchange="onDocChange()" style="width:100%; background:#0f1535; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none;">
+              <option value="">— Select year —</option>
+              <option value="2026-2027">2026-2027</option>              
+			  <option value="2025-2026">2025-2026</option>              
+            </select>
+          </div>
+          <div>
+            <label style="display:block; font-size:0.75rem; color:var(--gray); margin-bottom:6px;">Semester / الفصل</label>
+            <select id="semSelector" onchange="onDocChange()" style="width:100%; background:#0f1535; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px 14px; color:var(--white); font-size:0.82rem; font-family:'DM Sans',sans-serif; outline:none;">
+              <option value="">— Select semester —</option>
+              <option value="Semester 1 (Fall)">Semester 1 (Fall)</option>
+              <option value="Semester 2 (Spring)">Semester 2 (Spring)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CELL 4 (bottom-right): Upload -->
+      <div id="step4Box" style="display:none; background:var(--card-bg); border:1px solid rgba(26,58,255,0.25); border-radius:16px; padding:28px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <span style="background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; font-size:0.72rem; font-weight:700; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</span>
+          <h3 style="font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--cyan); margin:0;">Upload File / رفع الملف</h3>
         </div>
 
-        <div class="file-list" id="fileList"></div>
+        <!-- Summary -->
+        <div style="background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); border-radius:10px; padding:14px 16px; margin-bottom:16px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <div style="font-size:0.7rem; color:var(--gray); margin-bottom:2px;">Department</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--white);" id="summDept"></div>
+            </div>
+            <div>
+              <div style="font-size:0.7rem; color:var(--gray); margin-bottom:2px;">Document</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--white);" id="summDoc"></div>
+            </div>
+            <div>
+              <div style="font-size:0.7rem; color:var(--gray); margin-bottom:2px;">Academic Year</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--white);" id="summYear"></div>
+            </div>
+            <div>
+              <div style="font-size:0.7rem; color:var(--gray); margin-bottom:2px;">Semester</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--white);" id="summSem"></div>
+            </div>
+          </div>
+        </div>
 
-        <button class="submit-btn" id="submitBtn" onclick="submitFiles()" disabled>
-          Submit to Department
+        <button onclick="handleUploadClick()" style="width:100%; background:linear-gradient(135deg,#1a3aff,#00d4ff); color:#fff; border:none; border-radius:10px; padding:14px; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center; justify-content:center; gap:10px;">
+          <span>📤</span><span>Open Upload Folder →</span>
         </button>
+        <p style="color:var(--gray); font-size:0.72rem; text-align:center; margin-top:8px; line-height:1.6;">
+          OneDrive folder opens in a new tab.<br>Sign in with your UTAS account then upload your file.
+        </p>
       </div>
-    </div>
-  </div>
 
-  Submissions Table
-  <div class="submissions-section">
-    <div class="submissions-title">
-      Recent Submissions
-      <span class="count-badge" id="submissionCount">0</span>
-    </div>
-    <div id="submissionsContainer">
-      <div class="no-submissions">No submissions yet. Upload files above to get started.</div>
-    </div>
-  </div>
-  -->
+    </div><!-- end 2x2 grid -->
 
-  <!-- Under Construction -->
-  <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; text-align:center; padding: 40px;">
-    <div style="font-size:4rem; margin-bottom:24px;">🚧</div>
-    <h2 style="font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; letter-spacing:-1px; margin-bottom:14px;">Under Construction</h2>
-    <p style="color:var(--gray); font-size:1rem; max-width:420px; line-height:1.7; font-weight:300;">This section is currently being built. Please check back soon — file collection for departments will be available shortly.</p>
-    <div style="margin-top:32px; padding: 12px 28px; border:1px solid rgba(255,210,63,0.3); border-radius:50px; background:rgba(255,210,63,0.08); color:var(--gold); font-size:0.85rem; font-weight:500; letter-spacing:0.05em;">Coming Soon</div>
-  </div>
+  </section>
+  <footer style="text-align:center; padding:22px 48px; border-top:1px solid rgba(255,255,255,0.07); color:var(--gray); font-size:0.78rem;">
+    © 2026 University of Technology and Applied Sciences, Sur
+  </footer>
+</div>
+
+
+<!-- ══ PAGE 5: FILE DOWNLOAD ══ -->
+<div class="page" id="page-downloads">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <section style="max-width:1100px; margin:0 auto; padding:48px 48px 80px;">
+    <div style="margin-bottom:36px;">
+      <h2 style="font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:4px;">File Download</h2>
+      <p style="font-family:'DM Sans',sans-serif; font-size:0.82rem; color:var(--cyan); margin-bottom:8px; direction:rtl; text-align:right;">تنزيل الملفات</p>
+      <p style="color:var(--gray); font-size:0.88rem; line-height:1.7;">Download official forms, templates, and documents from the Quality Assurance Section.</p>
+    </div>
+
+    <!-- Under Construction -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:50vh; text-align:center; padding:40px;">
+      <div style="font-size:4rem; margin-bottom:24px;">📥</div>
+      <h2 style="font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; letter-spacing:-1px; margin-bottom:14px;">Under Construction</h2>
+      <p style="color:var(--gray); font-size:1rem; max-width:420px; line-height:1.7; font-weight:300;">Downloadable files and resources will be available here shortly.</p>
+      <div style="margin-top:32px; padding:12px 28px; border:1px solid rgba(255,210,63,0.3); border-radius:50px; background:rgba(255,210,63,0.08); color:var(--gold); font-size:0.85rem; font-weight:500; letter-spacing:0.05em;">Coming Soon</div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer style="text-align:center; padding:22px 48px; border-top:1px solid rgba(255,255,255,0.07); color:var(--gray); font-size:0.78rem;">
@@ -1060,7 +1116,7 @@
           <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">✉️</div>
           <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--cyan);">Email</h3>
         </div>
-        <p style="color:var(--gray); font-size:0.88rem; line-height:1.75; font-weight:300;">Quality Assurance Section<br><a href="mailto:qa.sur@utas.edu.om" style="color:var(--cyan); text-decoration:none;">qa.sur@utas.edu.om</a></p>
+        <p style="color:var(--gray); font-size:0.88rem; line-height:1.75; font-weight:300;">Quality Assurance Section<br><span style="color:var(--cyan);">qa.sur&#64;utas.edu.om</span></p>
       </div>
 
       <!-- Phone -->
@@ -1098,139 +1154,500 @@
     <div class="toast-sub" id="toastSub">3 files received by Computer Science</div>
   </div>
 </div>
+<script>
+  // ═══════════════════════════════════════════════════════════════════
+  // AUTHORIZED USERS
+  // Edit authorized_emails.txt (in the same folder as this HTML file)
+  // to add or remove users. One email per line. No programming needed.
+  // ═══════════════════════════════════════════════════════════════════
+  var AUTHORIZED_EMAILS_FILE = 'authorized_emails.txt';
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ─── File Upload Logic ───
-  let selectedFiles = [];
-  let selectedDept = 'Computer Science';
-  let submissions = [];
-  let deptCounts = {};
+  // Fallback list — used only if txt file cannot be loaded
+  var AUTHORIZED_EMAILS_FALLBACK = [
+    "mohamed.abbas@utas.edu.om",
+    "qa.sur&#64;utas.edu.om"
+  ];
 
-  function selectDept(el, dept) {
-    document.querySelectorAll('.dept-item').forEach(d => {
-      d.classList.remove('selected');
-      d.querySelector('.dept-check').textContent = '';
-    });
-    el.classList.add('selected');
-    el.querySelector('.dept-check').textContent = '✓';
-    selectedDept = dept;
-    document.getElementById('selectedDeptBadge').textContent = dept;
-  }
+  // ═══════════════════════════════════════════════════════════════════
+  // DEPARTMENT DOCUMENT LISTS
+  // ═══════════════════════════════════════════════════════════════════
+  var DEPT_DOCS = {
+    "AVC Office": ["Branch Council Meeting Minutes","Terms of Reference for Committees","Administrative Decisions (HO)","Branch Council Review Report","Annual Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "DAVC \u2013 Academic Affairs (DAVC-AA)": ["Meeting Minutes of Heads of Academic Departments","Program/Curriculum Review Reports","Staff Induction Documents","Staff Induction Review Report","Student Orientation Documents","Student Orientation Review Report","Physical Resources Need from Academic Departments","Academic Support Services Documents","Staff Training Needs Approval Document","Benchmarking Approval Document","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Midterm Minutes of Meeting","Final Examination Minutes of Meeting","Midterm Examination Survey Report","Final Examination Survey Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "DAVC \u2013 Postgraduate, Research & Innovation (DAVC-PSSRI)": ["Meeting Minutes with Heads of Departments","Internal Research Grant Approval Document","Entrepreneurship and Innovation Approval Documents","Research Infrastructure Approval Documents","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "DAVC \u2013 Electronic Systems & Student Services (DAVC-ESSS)": ["Meetings of Meeting with Units","Student Activity Approval Document","Digital Infrastructure Approval Documents","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "DAVC \u2013 Administrative & Financial Affairs (DAFA)": ["Meeting Minutes with Units","Approval of Staff Performance Documents","Staff Training and Development Documents","Review Meeting Minutes/Reports","Monitoring Reports or Communications","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Human Resource Section (HRS)": ["Staff Trainings Documents/Approvals","Staff Needs of All Departments","HR Services Review Documents","Staff Grievance Reports","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Financial Affairs Section (FAS)": ["Budget Document/Report/Meeting Minutes","Research Fund Release Documents","Financial Diversification Approval Documents","Financial Risk Plan","Student Allowance Summary Documents/Reports","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Administrative Affairs Section (AAS)": ["Meeting Minutes of Staff Meeting","Annual Maintenance and Management of Facilities Plan","Health & Safety Plan and Other Documents","Risk Management Plan","Review Meeting Minutes/Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Training and Career Guidance Centre (TCGC)": ["Meeting Minutes of Staff Meeting","Graduate Follow-up Reports/Documents","OJT Documents/Reports","Student Activities Report","Alumni Database","Review of Activities Meeting Minutes/Report","Community Activities Report","List of Activities Conducted for Community","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Student Affairs Centre (SAC)": ["Meeting Minutes of Staff Meeting","Student Activities Report","Student Grievance Reports","Review of Activities Meeting Minutes/Report","Community Activities Report","List of Activities Conducted for Community","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Admission and Registration Centre (ARC)": ["Meeting Minutes of Staff Meeting","Student Registration Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Information Systems and Educational Technologies Centre (ISETC)": ["Meeting Minutes of Staff Meeting","Student Activities Report","Review of Activities Meeting Minutes/Report","Community Activities Report","List of Activities Conducted for Community","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Research and Consultation Department (RCD)": ["List of Activities Conducted/Report","List of Achievements/Reports","Approval Documents of RG, GRG, and URG","Internal Evaluation of Research Projects","List of Publications by Staff","Conferences Conducted by Branch","Staff and Students Attending Conferences","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Innovation and Technology Transfer": ["List of Activities Conducted/Report","List of Achievements/Reports","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Quality Assurance Section (QAS)": ["Minutes of Meeting","List of Activities Conducted/Report","Staff Satisfaction Survey Reports","Student Satisfaction Survey Reports","IQA Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Computing and Information Sciences Department": ["Minutes of Meeting","Program/Curriculum Review Report","Staff Workload","Staff Profile","Staff and Student Ratio Analysis Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Biotechnology Department": ["Minutes of Meeting","Program/Curriculum Review Report","Staff Workload","Staff Profile","Staff and Student Ratio Analysis Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Mass Communication Department": ["Minutes of Meeting","Program/Curriculum Review Report","Staff Workload","Staff Profile","Staff and Student Ratio Analysis Report","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Preparatory Studies Centre": ["Minutes of Meeting","Program/Curriculum Review Report","Staff Workload","Staff Profile","Improvement Plan based on Audit Report","Action Plan (AP)","Operational Plan Achievement Report (OPAR)"],
+    "Quality Assurance Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Academic Advising Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Activities and Field Trips Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Professional Development Committee": ["List of Professional Development Needs (Academic)","List of Professional Development Needs (Non-Academic)","Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Documentation Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Examination and Assessment Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Health and Safety Committee": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Risk Management Committee": ["Branch Risk Management Plan","Risk Register","Evidence of Risks in Branch Plans","Evidence of Risks Being Mitigated","Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "E-learning Committee (PSC)": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Students Learning Support Committee (PSC)": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"],
+    "Student Activities Committee (PSC)": ["Minutes of Meeting","Committee Self-Assessment Report","Activities Report"]
+  };
 
-  const dropZone = document.getElementById('dropZone');
-  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault(); dropZone.classList.remove('dragover');
-    handleFiles(e.dataTransfer.files);
-  });
+  // ═══════════════════════════════════════════════════════════════════
+  // DEPARTMENT ONEDRIVE UPLOAD LINKS
+  // Replace YOUR_ONEDRIVE_LINK_HERE with each folder's share link
+  // ═══════════════════════════════════════════════════════════════════
+  // ═══════════════════════════════════════════════════════════════════
+  // DOCUMENT UPLOAD LINKS
+  // Key format: "Department||Document"
+  // How to get a link: OneDrive -> right-click the document folder
+  //   -> Share -> Anyone with link -> Can upload -> Copy link
+  // ═══════════════════════════════════════════════════════════════
+  var DOC_LINKS = {
+    // AVC Office
+    "AVC Office||Branch Council Meeting Minutes": "https://utasoman-my.sharepoint.com/:f:/g/personal/qa_sur_utas_edu_om/IgDMuwM2LKlvTriLwEZDbDfMAQdaZfCJBoqe9nqQWp678VA?e=hDfo2D",
+    "AVC Office||Terms of Reference for Committees": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Administrative Decisions (HO)": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Branch Council Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+	"AVC Office||Annual Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "AVC Office||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function handleFiles(files) {
-    Array.from(files).forEach(f => {
-      if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) {
-        selectedFiles.push(f);
-      }
-    });
-    renderFileList();
-    document.getElementById('submitBtn').disabled = selectedFiles.length === 0;
-  }
+    // DAVC – Academic Affairs (DAVC-AA)
+    "DAVC – Academic Affairs (DAVC-AA)||Meeting Minutes of Heads of Academic Departments": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Program/Curriculum Review Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Staff Induction Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Staff Induction Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Student Orientation Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Student Orientation Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Physical Resources Need from Academic Departments": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Academic Support Services Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Staff Training Needs Approval Document": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Benchmarking Approval Document": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Review Meeting Minutes/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Monitoring Reports or Communications": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Midterm Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Final Examination Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Midterm Examination Survey Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Final Examination Survey Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Academic Affairs (DAVC-AA)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function getFileIcon(name) {
-    const ext = name.split('.').pop().toLowerCase();
-    if (['pdf'].includes(ext)) return '📄';
-    if (['doc','docx'].includes(ext)) return '📝';
-    if (['xls','xlsx','csv'].includes(ext)) return '📊';
-    if (['ppt','pptx'].includes(ext)) return '📋';
-    if (['jpg','jpeg','png','gif','webp'].includes(ext)) return '🖼️';
-    if (['zip','rar','7z'].includes(ext)) return '📦';
-    if (['mp4','mov','avi'].includes(ext)) return '🎬';
-    return '📎';
-  }
+    // DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Meeting Minutes with Heads of Departments": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Internal Research Grant Approval Document": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Entrepreneurship and Innovation Approval Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Research Infrastructure Approval Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Review Meeting Minutes/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Monitoring Reports or Communications": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Postgraduate, Research & Innovation (DAVC-PSSRI)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function formatBytes(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / 1048576).toFixed(1) + ' MB';
-  }
+    // DAVC – Electronic Systems & Student Services (DAVC-ESSS)
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Meetings of Meeting with Units": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Student Activity Approval Document": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Digital Infrastructure Approval Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Review Meeting Minutes/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Monitoring Reports or Communications": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Electronic Systems & Student Services (DAVC-ESSS)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function renderFileList() {
-    const list = document.getElementById('fileList');
-    list.innerHTML = selectedFiles.map((f, i) => `
-      <div class="file-item">
-        <div class="file-type-icon">${getFileIcon(f.name)}</div>
-        <div class="file-info">
-          <div class="file-name">${f.name}</div>
-          <div class="file-size">${formatBytes(f.size)}</div>
-        </div>
-        <button class="file-remove" onclick="removeFile(${i})">✕</button>
-      </div>
-    `).join('');
-  }
+    // DAVC – Administrative & Financial Affairs (DAFA)
+    "DAVC – Administrative & Financial Affairs (DAFA)||Meeting Minutes with Units": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Approval of Staff Performance Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Staff Training and Development Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Review Meeting Minutes/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Monitoring Reports or Communications": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "DAVC – Administrative & Financial Affairs (DAFA)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function removeFile(i) {
-    selectedFiles.splice(i, 1);
-    renderFileList();
-    document.getElementById('submitBtn').disabled = selectedFiles.length === 0;
-  }
+    // Human Resource Section (HRS)
+    "Human Resource Section (HRS)||Staff Trainings Documents/Approvals": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Staff Needs of All Departments": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||HR Services Review Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Staff Grievance Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Human Resource Section (HRS)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function submitFiles() {
-    const name = document.getElementById('submitterName').value || 'Anonymous';
-    const type = document.getElementById('docType').value || 'Unspecified';
-    const desc = document.getElementById('docDescription').value || '—';
-    const count = selectedFiles.length;
-    const dept = selectedDept;
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-    const dateStr = now.toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'});
+    // Financial Affairs Section (FAS)
+    "Financial Affairs Section (FAS)||Budget Document/Report/Meeting Minutes": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Research Fund Release Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Financial Diversification Approval Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Financial Risk Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Student Allowance Summary Documents/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Financial Affairs Section (FAS)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-    submissions.unshift({ dept, name, type, desc, count, dateStr, timeStr });
+    // Administrative Affairs Section (AAS)
+    "Administrative Affairs Section (AAS)||Meeting Minutes of Staff Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Annual Maintenance and Management of Facilities Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Health & Safety Plan and Other Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Risk Management Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Review Meeting Minutes/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Administrative Affairs Section (AAS)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-    deptCounts[dept] = (deptCounts[dept] || 0) + count;
-    const countEl = document.getElementById('count-' + dept);
-    if (countEl) {
-      const total = deptCounts[dept];
-      countEl.textContent = total + ' file' + (total !== 1 ? 's' : '') + ' submitted';
-    }
+    // Training and Career Guidance Centre (TCGC)
+    "Training and Career Guidance Centre (TCGC)||Meeting Minutes of Staff Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Graduate Follow-up Reports/Documents": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||OJT Documents/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Student Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Alumni Database": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Review of Activities Meeting Minutes/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Community Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||List of Activities Conducted for Community": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Training and Career Guidance Centre (TCGC)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-    const totalCount = Object.values(deptCounts).reduce((a, b) => a + b, 0);
-    document.getElementById('totalCounter').textContent = totalCount;
+    // Student Affairs Centre (SAC)
+    "Student Affairs Centre (SAC)||Meeting Minutes of Staff Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Student Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Student Grievance Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Review of Activities Meeting Minutes/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Community Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||List of Activities Conducted for Community": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Affairs Centre (SAC)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-    selectedFiles = [];
-    renderFileList();
-    document.getElementById('submitterName').value = '';
-    document.getElementById('docType').value = '';
-    document.getElementById('docDescription').value = '';
-    document.getElementById('fileInput').value = '';
-    document.getElementById('submitBtn').disabled = true;
+    // Admission and Registration Centre (ARC)
+    "Admission and Registration Centre (ARC)||Meeting Minutes of Staff Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Admission and Registration Centre (ARC)||Student Registration Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Admission and Registration Centre (ARC)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Admission and Registration Centre (ARC)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Admission and Registration Centre (ARC)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Admission and Registration Centre (ARC)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-    renderSubmissions();
-    showToast(`${count} file${count !== 1 ? 's' : ''} received by ${dept}`);
-  }
+    // Information Systems and Educational Technologies Centre (ISETC)
+    "Information Systems and Educational Technologies Centre (ISETC)||Meeting Minutes of Staff Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Student Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Review of Activities Meeting Minutes/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Community Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||List of Activities Conducted for Community": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Information Systems and Educational Technologies Centre (ISETC)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
 
-  function renderSubmissions() {
-    const container = document.getElementById('submissionsContainer');
-    document.getElementById('submissionCount').textContent = submissions.length;
-    if (submissions.length === 0) {
-      container.innerHTML = '<div class="no-submissions">No submissions yet. Upload files above to get started.</div>';
+    // Research and Consultation Department (RCD)
+    "Research and Consultation Department (RCD)||List of Activities Conducted/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||List of Achievements/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Approval Documents of RG, GRG, and URG": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Internal Evaluation of Research Projects": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||List of Publications by Staff": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Conferences Conducted by Branch": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Staff and Students Attending Conferences": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Research and Consultation Department (RCD)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Innovation and Technology Transfer
+    "Innovation and Technology Transfer||List of Activities Conducted/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Innovation and Technology Transfer||List of Achievements/Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Innovation and Technology Transfer||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Innovation and Technology Transfer||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Innovation and Technology Transfer||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Innovation and Technology Transfer||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Quality Assurance Section (QAS)
+    "Quality Assurance Section (QAS)||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||List of Activities Conducted/Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||Staff Satisfaction Survey Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||Student Satisfaction Survey Reports": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||IQA Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Section (QAS)||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Computing and Information Sciences Department
+    "Computing and Information Sciences Department||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Program/Curriculum Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Staff Workload": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Staff Profile": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Staff and Student Ratio Analysis Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Computing and Information Sciences Department||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Biotechnology Department
+    "Biotechnology Department||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Program/Curriculum Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Staff Workload": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Staff Profile": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Staff and Student Ratio Analysis Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Biotechnology Department||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Mass Communication Department
+    "Mass Communication Department||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Program/Curriculum Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Staff Workload": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Staff Profile": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Staff and Student Ratio Analysis Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Mass Communication Department||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Preparatory Studies Centre
+    "Preparatory Studies Centre||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Program/Curriculum Review Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Staff Workload": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Staff Profile": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Improvement Plan based on Audit Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Action Plan (AP)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Operational Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Preparatory Studies Centre||Achievement Report (OPAR)": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Quality Assurance Committee
+    "Quality Assurance Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Quality Assurance Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Academic Advising Committee
+    "Academic Advising Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Academic Advising Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Academic Advising Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Activities and Field Trips Committee
+    "Activities and Field Trips Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Activities and Field Trips Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Activities and Field Trips Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Professional Development Committee
+    "Professional Development Committee||List of Professional Development Needs (Academic)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Professional Development Committee||List of Professional Development Needs (Non-Academic)": "YOUR_ONEDRIVE_LINK_HERE",
+    "Professional Development Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Professional Development Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Professional Development Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Documentation Committee
+    "Documentation Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Documentation Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Documentation Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Examination and Assessment Committee
+    "Examination and Assessment Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Examination and Assessment Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Examination and Assessment Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Health and Safety Committee
+    "Health and Safety Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Health and Safety Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Health and Safety Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Risk Management Committee
+    "Risk Management Committee||Branch Risk Management Plan": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Risk Register": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Evidence of Risks in Branch Plans": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Evidence of Risks Being Mitigated": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Risk Management Committee||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // E-learning Committee (PSC)
+    "E-learning Committee (PSC)||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "E-learning Committee (PSC)||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "E-learning Committee (PSC)||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Students Learning Support Committee (PSC)
+    "Students Learning Support Committee (PSC)||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Students Learning Support Committee (PSC)||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Students Learning Support Committee (PSC)||Activities Report": "YOUR_ONEDRIVE_LINK_HERE",
+
+    // Student Activities Committee (PSC)
+    "Student Activities Committee (PSC)||Minutes of Meeting": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Activities Committee (PSC)||Committee Self-Assessment Report": "YOUR_ONEDRIVE_LINK_HERE",
+    "Student Activities Committee (PSC)||Activities Report": "YOUR_ONEDRIVE_LINK_HERE"
+
+  };
+
+  // ─── STEP 1: EMAIL VERIFY ────────────────────────────────────────────────────
+  function verifyEmail() {
+    var email    = document.getElementById('verifyEmailInput').value.trim().toLowerCase();
+    var btnEl    = document.getElementById('verifyBtn');
+    var checkEl  = document.getElementById('verifyChecking');
+    var unauthEl = document.getElementById('verifyUnauthorized');
+    var errorEl  = document.getElementById('verifyError');
+
+    unauthEl.style.display = 'none';
+    errorEl.style.display  = 'none';
+
+    if (!email || email.indexOf('@') === -1) {
+      errorEl.textContent   = 'Please enter a valid email address.';
+      errorEl.style.display = 'block';
       return;
     }
-    container.innerHTML = `
-      <table class="submissions-table">
-        <thead>
-          <tr>
-            <th>Department</th>
-            <th>Submitted By</th>
-            <th>Type</th>
-            <th>Files</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${submissions.map(s => `
-            <tr>
-              <td><strong>${s.dept}</strong></td>
-              <td>${s.name}</td>
-              <td>${s.type}</td>
-              <td>${s.count} file${s.count !== 1 ? 's' : ''}</td>
-              <td style=
+
+    checkEl.style.display = 'block';
+    checkEl.textContent   = '🔄 Loading authorization list...';
+    btnEl.disabled        = true;
+
+    // Try to load authorized_emails.txt from same folder
+    fetch(AUTHORIZED_EMAILS_FILE + '?nocache=' + Date.now())
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function(txt) {
+        checkEl.textContent = '🔄 Checking...';
+        // Parse txt: one email per line
+        var list = [];
+        var rows = txt.split(String.fromCharCode(10));
+        for (var i = 0; i < rows.length; i++) {
+          var row = rows[i].split(String.fromCharCode(13)).join('').trim().toLowerCase();
+          if (row.length > 3 && row.indexOf('@') !== -1) list.push(row);
+        }
+        checkVerify(email, list, 'txt');
+      })
+      .catch(function(err) {
+        checkEl.textContent = '🔄 Using built-in list...';
+        // Fallback to built-in list
+        checkVerify(email, AUTHORIZED_EMAILS_FALLBACK.map(function(e){ return e.toLowerCase(); }), 'fallback');
+      });
+  }
+
+  function checkVerify(email, list, source) {
+    var btnEl    = document.getElementById('verifyBtn');
+    var checkEl  = document.getElementById('verifyChecking');
+    var unauthEl = document.getElementById('verifyUnauthorized');
+    var errorEl  = document.getElementById('verifyError');
+
+    checkEl.style.display = 'none';
+    checkEl.textContent   = '🔄 Checking...';
+    btnEl.disabled        = false;
+
+    var found = list.indexOf(email) !== -1;
+
+    if (found) {
+      document.getElementById('emailInputArea').style.display   = 'none';
+      document.getElementById('verifiedBadge').style.display    = 'flex';
+      document.getElementById('verifiedEmailBadge').textContent = '\u2713  ' + email;
+      document.getElementById('step2Box').style.display         = 'block';
+      setTimeout(function() {
+        document.getElementById('step2Box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+    } else {
+      document.getElementById('rejectedEmail').textContent = email;
+      unauthEl.style.display = 'block';
+    }
+  }
+
+  function resetAll() {
+    document.getElementById('emailInputArea').style.display  = 'block';
+    document.getElementById('verifiedBadge').style.display   = 'none';
+    document.getElementById('verifyEmailInput').value        = '';
+    document.getElementById('verifyUnauthorized').style.display = 'none';
+    document.getElementById('verifyError').style.display       = 'none';
+    document.getElementById('verifyChecking').style.display    = 'none';
+    document.getElementById('verifyBtn').disabled              = false;
+    document.getElementById('step2Box').style.display   = 'none';
+    document.getElementById('step3Box').style.display   = 'none';
+    document.getElementById('step4Box').style.display   = 'none';
+    document.getElementById('deptSelector').value       = '';
+    document.getElementById('docSelector').value        = '';
+    document.getElementById('acadYear').value           = '';
+    document.getElementById('semSelector').value        = '';
+  }
+
+  // ─── STEP 2: DEPARTMENT SELECTED ────────────────────────────────────────────
+  function onDeptChange() {
+    var dept = document.getElementById('deptSelector').value;
+    document.getElementById('step3Box').style.display = 'none';
+    document.getElementById('step4Box').style.display = 'none';
+    document.getElementById('docSelector').value      = '';
+    document.getElementById('acadYear').value         = '';
+    document.getElementById('semSelector').value      = '';
+
+    if (!dept) return;
+
+    // Populate document list for selected dept
+    var docs   = DEPT_DOCS[dept] || [];
+    var select = document.getElementById('docSelector');
+    select.innerHTML = '<option value="">— Select required document —</option>';
+    for (var i = 0; i < docs.length; i++) {
+      var opt = document.createElement('option');
+      opt.value = docs[i];
+      opt.textContent = docs[i];
+      select.appendChild(opt);
+    }
+
+    document.getElementById('step3Box').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('step3Box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  }
+
+  // ─── STEP 3: DOC + YEAR + SEMESTER SELECTED ─────────────────────────────────
+  function onDocChange() {
+    var doc  = document.getElementById('docSelector').value;
+    var year = document.getElementById('acadYear').value;
+    var sem  = document.getElementById('semSelector').value;
+
+    if (!doc || !year || !sem) {
+      document.getElementById('step4Box').style.display = 'none';
+      return;
+    }
+
+    var dept = document.getElementById('deptSelector').value;
+    document.getElementById('summDept').textContent  = dept;
+    document.getElementById('summDoc').textContent   = doc;
+    document.getElementById('summYear').textContent  = year;
+    document.getElementById('summSem').textContent   = sem;
+    document.getElementById('step4Box').style.display = 'block';
+    setTimeout(function() {
+      document.getElementById('step4Box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 80);
+  }
+
+  // ─── STEP 4: UPLOAD ──────────────────────────────────────────────────────────
+  function handleUploadClick() {
+    var dept = document.getElementById('deptSelector').value;
+    var doc  = document.getElementById('docSelector').value;
+    var year = document.getElementById('acadYear').value;
+    var sem  = document.getElementById('semSelector').value;
+    var key  = dept + '||' + doc;
+    var link = DOC_LINKS[key];
+    if (!link || link === 'YOUR_ONEDRIVE_LINK_HERE') {
+      alert('Upload folder for:\n\nDepartment: ' + dept + '\nDocument: ' + doc + '\n\nhas not been configured yet.\n\nTo set it up:\n1. Open OneDrive\n2. Right-click: QA Uploads > ' + dept + ' > ' + doc + '\n3. Share > Anyone with link > Can upload > Copy link\n4. Paste it into DOC_LINKS in the HTML file.');
+      return;
+    }
+    window.open(link, '_blank');
+  }
+</script>
+</body>
+</html>
